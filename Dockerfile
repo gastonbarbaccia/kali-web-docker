@@ -25,6 +25,7 @@ RUN useradd -m -s /bin/bash kali && \
     echo "kali:kali" | chpasswd && \
     usermod -aG sudo kali
 
+COPY vnc.html  /usr/share/novnc   
 RUN chmod -R 777 /usr/share/novnc
 
 # Crear directorios necesarios y establecer permisos
