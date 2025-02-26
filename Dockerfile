@@ -17,7 +17,6 @@ RUN apt update && apt upgrade -y && apt install -y \
     kali-tools-top10 \
     && rm -rf /var/lib/apt/lists/*
 
-
 RUN apt install kali-tools-top10 -y
 
 # Crear usuario VNC con permisos de sudo
@@ -53,6 +52,7 @@ CMD ["bash", "-c", "\
     export DISPLAY=:1 && \
     while true; do xrandr --output $(xrandr | grep ' connected' | awk '{print $1}') --auto; sleep 5; done & \
     echo '<meta http-equiv=\"refresh\" content=\"0; url=vnc.html?resize=remote\">' > /usr/share/novnc/index.html && \
-    websockify --web=/usr/share/novnc/ 0.0.0.0:6080 localhost:5901 && \
-    tail -F /home/kali/.vnc/*.log"]
+    websockify --web=/usr/share/novnc/ 0.0.0.0:6080 localhost:5901 & \
+    caddy run --config /etc/caddy/Caddyfile"]   
+
 
