@@ -1,5 +1,6 @@
 provider "aws" {
   region = "us-east-1"  # Cambia la región si es necesario
+
 }
 
 resource "aws_security_group" "allow_all" {
@@ -26,7 +27,15 @@ resource "aws_instance" "ec2_instances" {
   ami = "ami-08e5424edfe926b43"  # Ubuntu 22.04 LTS en us-east-1
   instance_type = "t2.medium"
   security_groups = [aws_security_group.allow_all.name]
-  user_data = file("userdata.sh")  # Script de inicialización
+
+  user_data = <<-EOF
+    #!/bin/bash
+    set -e  # Detiene el script si hay errores
+    cd /home/ubuntu/
+    git clone https://github.com/gastonbarbaccia/kali-web-docker.git
+    chmod +x /home/ubuntu/kali-web-docker/install.sh
+    bash install.sh
+  EOF
 
   tags = {
     Name = "Instance-${count.index + 1}"
