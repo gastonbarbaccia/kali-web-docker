@@ -7,6 +7,8 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Posicionarse dentro del proyecto
+cd /home/ubuntu
+git clone https://github.com/gastonbarbaccia/kali-web-docker.git
 cd /home/ubuntu/kali-web-docker
 
 # Construir y ejecutar el contenedor
