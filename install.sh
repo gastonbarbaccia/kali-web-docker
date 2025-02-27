@@ -1,6 +1,6 @@
  #!/bin/bash
-sudo apt update -y && apt upgrade -y
-sudo apt install -y docker.io git
+sudo apt-get update -y && apt-get upgrade -y
+sudo apt-get install docker.io git -y
 
 # Habilitar y arrancar Docker
 sudo systemctl enable docker
